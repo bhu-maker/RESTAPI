@@ -22,6 +22,25 @@ def listing(request):
             return Response(servar.data,status=status.HTTP_201_CREATED)
         return Response(servar.error,status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])        
+def apilisting(request):
+       servar=corpseri(data=request.data)
+       if servar.is_valid():
+           servar.save()
+           return Response(servar.data,status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])           
+def apigetting(request):
+    modvar=models.corporates.objects.all()
+    servar=corpseri(modvar,many=True)
+    return Response(servar.data)
+
+@api_view(['GET'])    
+def apireading(request,para):
+    modvar=models.corporates.objects.get(org=para)
+    servar=corpseri(modvar)
+    return Response(servar.data,status=status.HTTP_200_OK)
+
 @api_view(['GET','PUT','DELETE'])        
 def updating(request,pk):
     try:

@@ -40,10 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restapp',
     'rest_framework',
-    'crispy_forms'
+    'crispy_forms',
+    'corsheaders'
 
 ]
-CRISSPY_TEMPLATES_PACK='bootstrap4'
+CRISPY_TEMPLATE_PACK='bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'restproject.urls'
@@ -89,7 +91,9 @@ DATABASES = {
     }
 }
 ALLOWED_HOSTS=['*']
-
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000',
+    ]
 
 
 # Password validation
