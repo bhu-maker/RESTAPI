@@ -11,3 +11,5 @@ class corporates(models.Model):
     employees=models.IntegerField()
     ratings=models.DecimalField(max_digits=3,decimal_places=2)
 
+def __str__(self):
+    return self.org

@@ -41,6 +41,28 @@ def apireading(request,para):
     servar=corpseri(modvar)
     return Response(servar.data,status=status.HTTP_200_OK)
 
+@api_view(['GET'])    
+def apireadingbyid(request,para):
+    modvar=models.corporates.objects.get(id=para)
+    servar=corpseri(modvar)
+    return Response(servar.data,status=status.HTTP_200_OK)    
+
+@api_view(['POST'])    
+def putting(request,pk):
+    modvar=models.corporates.objects.get(id=pk)
+    servar=corpseri(instance=modvar,data=request.data)
+    if servar.is_valid():
+        servar.save()
+        return Response(servar.data)
+    return Response(servar.error,status=status.HTTP_404_NOT_FOUND)  
+
+@api_view(['DELETE'])      
+def deleting(request,pk):
+    modvar=models.corporates.objects.get(id=pk)
+    #models.corporates.delete(modvar)
+    modvar.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['GET','PUT','DELETE'])        
 def updating(request,pk):
     try:
